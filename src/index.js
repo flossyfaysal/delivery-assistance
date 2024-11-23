@@ -1,8 +1,13 @@
 import { useState } from "react";
 import apiFetch from "@wordpress/api-fetch";
 import ReactDOM from "react-dom/client";
+import Message from "./components/Message";
+import Tabs from "./components/Tabs";
+import InputField from "./components/InputField";
+import CheckboxField from "./components/CheckboxField";
+import SaveButton from "./components/SaveButton";
 
-const App = () => {
+const SettingsApp = () => {
   const [activeTab, setActiveTab] = useState("general");
   const [options, setOptions] = useState(DeliveryAssistanceData.options || {});
   const [message, setMessage] = useState("");
@@ -25,9 +30,11 @@ const App = () => {
       .then((response) => {
         if (response.data) {
           setOptions(response.data); // Update state with the latest options
-          setMessage("Settings saved successfully!");
+          setMessage("");
+          setTimeout(() => setMessage("Settings saved successfully!"), 0);
         } else {
-          setMessage("Settings saved, but no data returned.");
+          setMessage("");
+          setTimeout(() => setMessage("Error saving settings."), 0);
         }
       })
       .catch(() => setMessage("Error saving settings."));
@@ -43,22 +50,10 @@ const App = () => {
     <div className="mt-5 mr-5 p-8 flex bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
       {/* Sidebar */}
       <div className="w-1/4 bg-gray-50 border-r border-gray-200 p-4">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">Menu</h2>
-        <ul className="space-y-2">
-          {tabs.map((tab) => (
-            <li
-              key={tab.id}
-              className={`cursor-pointer px-3 py-2 rounded-md text-gray-700 ${
-                activeTab === tab.id
-                  ? "bg-indigo-600 text-white"
-                  : "hover:bg-gray-100"
-              }`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </li>
-          ))}
-        </ul>
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">
+          Delivery Assistance
+        </h2>
+        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
 
       {/* Content Area */}
@@ -68,103 +63,59 @@ const App = () => {
         </h1>
 
         {/* Message */}
-        {message && (
-          <div className="mb-4 p-3 rounded-md text-white bg-green-500">
-            {message}
-          </div>
-        )}
+        {message && <Message message={message} />}
 
         {/* Settings Form */}
         <div className="space-y-8 border-t border-gray-200 pt-8">
           {activeTab === "general" && (
             <>
-              <div className="border-b border-gray-200 pb-8">
-                <label className="inline-flex items-center w-full">
-                  <span className="mr-2 text-gray-700 flex-shrink-0 font-bold">
-                    Default Status
-                  </span>
-                  <input
-                    type="text"
-                    value={options.default_status || ""}
-                    onChange={(e) =>
-                      handleChange("default_status", e.target.value)
-                    }
-                    className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </label>
-              </div>
-              <div className="border-b border-gray-200 pb-8">
-                <label className="inline-flex items-center cursor-pointer">
-                  <span className="mr-2 text-gray-700 flex-shrink-0 font-bold">
-                    Enable Feature
-                  </span>
-                  <div className="relative">
-                    <input
-                      type="checkbox"
-                      checked={options.enable_feature || false}
-                      onChange={(e) =>
-                        handleChange("enable_feature", e.target.checked)
-                      }
-                      className="sr-only"
-                    />
-                    <div
-                      className={`block w-12 h-6 rounded-full transition-all duration-300 ${
-                        options.enable_feature ? "bg-blue-500" : "bg-gray-300"
-                      }`}
-                    ></div>
-                    <div
-                      className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all duration-300 ${
-                        options.enable_feature ? "transform translate-x-6" : ""
-                      }`}
-                    ></div>
-                  </div>
-                </label>
-              </div>
+              <InputField
+                label={"Default Status"}
+                value={options.default_status || ""}
+                onChange={(value) => handleChange("default_status", value)}
+              />
+              <CheckboxField
+                label={"User Auth"}
+                checked={options.enable_feature}
+                onChange={(checked) => handleChange("enable_feature", checked)}
+                isEnabled={options.enable_feature}
+              />
             </>
           )}
 
           {activeTab === "api" && (
-            <div className="border-b border-gray-200 pb-4">
-              <label className="block mb-4">
-                <span className="block text-sm font-medium text-gray-700">
-                  API Key
-                </span>
-                <input
-                  type="text"
-                  value={options.api_key || ""}
-                  onChange={(e) => handleChange("api_key", e.target.value)}
-                  className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </label>
-            </div>
+            <InputField
+              label={"Redirect"}
+              value={options.redirect}
+              onChange={(value) => handleChange("redirect", value)}
+            />
           )}
 
           {activeTab === "advanced" && (
-            <div className="border-b border-gray-200 pb-4">
-              <p className="text-gray-500">Advanced settings coming soon...</p>
-            </div>
+            <CheckboxField
+              label={"Advanced"}
+              checked={options.advanced}
+              onChange={(checked) => handleChange("advanced", checked)}
+              isEnabled={options.advanced}
+            />
           )}
         </div>
 
         {/* Save Button */}
-        <button
-          onClick={saveSettings}
-          className="mt-6 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700"
-        >
-          Save Settings
-        </button>
+        <SaveButton onClick={saveSettings} />
       </div>
     </div>
   );
 };
 
-export default App;
+export default SettingsApp;
 
 const root = ReactDOM.createRoot(
   document.getElementById("delivery-assistance-settings-app")
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <SettingsApp />
   </React.StrictMode>
 );

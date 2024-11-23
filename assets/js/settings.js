@@ -3138,6 +3138,176 @@ function safeDecodeURIComponent(uriComponent) {
 
 /***/ }),
 
+/***/ "./src/components/CheckboxField.js":
+/*!*****************************************!*\
+  !*** ./src/components/CheckboxField.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var CheckboxField = function CheckboxField(_ref) {
+  var label = _ref.label,
+    checked = _ref.checked,
+    _onChange = _ref.onChange,
+    isEnabled = _ref.isEnabled;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "border-b border-gray-200 pb-8"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "inline-flex items-center cursor-pointer"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mr-2 text-gray-700 flex-shrink-0 font-bold"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "relative"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: checked,
+    onChange: function onChange(e) {
+      return _onChange(e.target.checked);
+    },
+    className: "sr-only"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "block w-12 h-6 rounded-full transition-all duration-300 ".concat(isEnabled ? "bg-blue-500" : "bg-gray-300")
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all duration-300 ".concat(isEnabled ? "transform translate-x-6" : "")
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CheckboxField);
+
+/***/ }),
+
+/***/ "./src/components/InputField.js":
+/*!**************************************!*\
+  !*** ./src/components/InputField.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var InputField = function InputField(_ref) {
+  var label = _ref.label,
+    value = _ref.value,
+    _onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "border-b border-gray-200 pb-4 flex items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mr-2 text-gray-700 flex-shrink-0 font-bold"
+  }, label), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: value,
+    onChange: function onChange(e) {
+      return _onChange(e.target.value);
+    },
+    className: "flex-grow px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 w-full"
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputField);
+
+/***/ }),
+
+/***/ "./src/components/Message.js":
+/*!***********************************!*\
+  !*** ./src/components/Message.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+var Message = function Message(_ref) {
+  var message = _ref.message;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState2 = _slicedToArray(_useState, 2),
+    visible = _useState2[0],
+    setVisible = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setVisible(true);
+    var timer = setTimeout(function () {
+      setVisible(false);
+    }, 3000);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }, [message]);
+  if (!visible) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mb-4 p-3 rounded-md text-white bg-green-500"
+  }, message);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Message);
+
+/***/ }),
+
+/***/ "./src/components/SaveButton.js":
+/*!**************************************!*\
+  !*** ./src/components/SaveButton.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var SaveButton = function SaveButton(_ref) {
+  var onClick = _ref.onClick;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    className: "mt-6 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700"
+  }, "Save Settings");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SaveButton);
+
+/***/ }),
+
+/***/ "./src/components/Tabs.js":
+/*!********************************!*\
+  !*** ./src/components/Tabs.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Tabs = function Tabs(_ref) {
+  var tabs = _ref.tabs,
+    activeTab = _ref.activeTab,
+    onTabClick = _ref.onTabClick;
+  return /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-2"
+  }, tabs.map(function (tab) {
+    return /*#__PURE__*/React.createElement("li", {
+      key: tab.id,
+      className: "cursor-pointer px-3 py-2 rounded-md text-gray-700 ".concat(activeTab === tab.id ? "bg-indigo-600 text-white" : "hover:bg-gray-100"),
+      onClick: function onClick() {
+        return onTabClick(tab.id);
+      }
+    }, tab.label);
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Tabs);
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/client.js":
 /*!******************************************!*\
   !*** ./node_modules/react-dom/client.js ***!
@@ -3922,6 +4092,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "./node_modules/@wordpress/api-fetch/build-module/index.js");
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _components_Message__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Message */ "./src/components/Message.js");
+/* harmony import */ var _components_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Tabs */ "./src/components/Tabs.js");
+/* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/InputField */ "./src/components/InputField.js");
+/* harmony import */ var _components_CheckboxField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/CheckboxField */ "./src/components/CheckboxField.js");
+/* harmony import */ var _components_SaveButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SaveButton */ "./src/components/SaveButton.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -3937,7 +4112,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var App = function App() {
+
+
+
+
+
+var SettingsApp = function SettingsApp() {
   var _tabs$find;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("general"),
     _useState2 = _slicedToArray(_useState, 2),
@@ -3967,9 +4147,15 @@ var App = function App() {
     }).then(function (response) {
       if (response.data) {
         setOptions(response.data); // Update state with the latest options
-        setMessage("Settings saved successfully!");
+        setMessage("");
+        setTimeout(function () {
+          return setMessage("Settings saved successfully!");
+        }, 0);
       } else {
-        setMessage("Settings saved, but no data returned.");
+        setMessage("");
+        setTimeout(function () {
+          return setMessage("Error saving settings.");
+        }, 0);
       }
     })["catch"](function () {
       return setMessage("Error saving settings.");
@@ -3991,83 +4177,53 @@ var App = function App() {
     className: "w-1/4 bg-gray-50 border-r border-gray-200 p-4"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "text-lg font-semibold text-gray-700 mb-4"
-  }, "Menu"), /*#__PURE__*/React.createElement("ul", {
-    className: "space-y-2"
-  }, tabs.map(function (tab) {
-    return /*#__PURE__*/React.createElement("li", {
-      key: tab.id,
-      className: "cursor-pointer px-3 py-2 rounded-md text-gray-700 ".concat(activeTab === tab.id ? "bg-indigo-600 text-white" : "hover:bg-gray-100"),
-      onClick: function onClick() {
-        return setActiveTab(tab.id);
-      }
-    }, tab.label);
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, "Delivery Assistance"), /*#__PURE__*/React.createElement(_components_Tabs__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    tabs: tabs,
+    activeTab: activeTab,
+    onTabClick: setActiveTab
+  })), /*#__PURE__*/React.createElement("div", {
     className: "w-3/4 p-12 bg-gray-50 border-l border-gray-200"
   }, /*#__PURE__*/React.createElement("h1", {
     className: "text-xl font-bold text-gray-800 mb-6"
   }, (_tabs$find = tabs.find(function (tab) {
     return tab.id === activeTab;
-  })) === null || _tabs$find === void 0 ? void 0 : _tabs$find.label), message && /*#__PURE__*/React.createElement("div", {
-    className: "mb-4 p-3 rounded-md text-white bg-green-500"
-  }, message), /*#__PURE__*/React.createElement("div", {
+  })) === null || _tabs$find === void 0 ? void 0 : _tabs$find.label), message && /*#__PURE__*/React.createElement(_components_Message__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    message: message
+  }), /*#__PURE__*/React.createElement("div", {
     className: "space-y-8 border-t border-gray-200 pt-8"
-  }, activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "border-b border-gray-200 pb-8"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "inline-flex items-center w-full"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "mr-2 text-gray-700 flex-shrink-0 font-bold"
-  }, "Default Status"), /*#__PURE__*/React.createElement("input", {
-    type: "text",
+  }, activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_InputField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: "Default Status",
     value: options.default_status || "",
-    onChange: function onChange(e) {
-      return handleChange("default_status", e.target.value);
+    onChange: function onChange(value) {
+      return handleChange("default_status", value);
+    }
+  }), /*#__PURE__*/React.createElement(_components_CheckboxField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: "User Auth",
+    checked: options.enable_feature,
+    onChange: function onChange(checked) {
+      return handleChange("enable_feature", checked);
     },
-    className: "mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "border-b border-gray-200 pb-8"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "inline-flex items-center cursor-pointer"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "mr-2 text-gray-700 flex-shrink-0 font-bold"
-  }, "Enable Feature"), /*#__PURE__*/React.createElement("div", {
-    className: "relative"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
-    checked: options.enable_feature || false,
-    onChange: function onChange(e) {
-      return handleChange("enable_feature", e.target.checked);
+    isEnabled: options.enable_feature
+  })), activeTab === "api" && /*#__PURE__*/React.createElement(_components_InputField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: "Redirect",
+    value: options.redirect,
+    onChange: function onChange(value) {
+      return handleChange("redirect", value);
+    }
+  }), activeTab === "advanced" && /*#__PURE__*/React.createElement(_components_CheckboxField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: "Advanced",
+    checked: options.advanced,
+    onChange: function onChange(checked) {
+      return handleChange("advanced", checked);
     },
-    className: "sr-only"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "block w-12 h-6 rounded-full transition-all duration-300 ".concat(options.enable_feature ? "bg-blue-500" : "bg-gray-300")
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all duration-300 ".concat(options.enable_feature ? "transform translate-x-6" : "")
-  }))))), activeTab === "api" && /*#__PURE__*/React.createElement("div", {
-    className: "border-b border-gray-200 pb-4"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "block mb-4"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "block text-sm font-medium text-gray-700"
-  }, "API Key"), /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    value: options.api_key || "",
-    onChange: function onChange(e) {
-      return handleChange("api_key", e.target.value);
-    },
-    className: "mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-  }))), activeTab === "advanced" && /*#__PURE__*/React.createElement("div", {
-    className: "border-b border-gray-200 pb-4"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "text-gray-500"
-  }, "Advanced settings coming soon..."))), /*#__PURE__*/React.createElement("button", {
-    onClick: saveSettings,
-    className: "mt-6 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700"
-  }, "Save Settings")));
+    isEnabled: options.advanced
+  })), /*#__PURE__*/React.createElement(_components_SaveButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    onClick: saveSettings
+  })));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SettingsApp);
 var root = react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot(document.getElementById("delivery-assistance-settings-app"));
-root.render(/*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(App, null)));
+root.render(/*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(SettingsApp, null)));
 })();
 
 /******/ })()

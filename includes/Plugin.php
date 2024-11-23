@@ -30,7 +30,8 @@ class Plugin {
         new Admin\Settings();
         new Frontend\Enqueue();
         new Database\Installer();
-       new RestAPI\SettingsAPI();
+        new RestAPI\SettingsAPI();
+        new Admin\CPT();
     }
 
     private function initialize_hooks() {
