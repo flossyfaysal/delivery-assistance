@@ -20,14 +20,14 @@ class CPT {
                 'all_items'     => __('All Parcels', 'delivery-assistance'),
             ],
             'public'        => true,
+            'show_ui'       => true,
             'has_archive'   => true,
             'menu_position' => 20,
             'menu_icon'     => 'dashicons-portfolio',
             'supports'      => ['title'], // Exclude post content
-            'show_ui'       => true, // Hide from the main menu
         ]);
     }
-
+    
     public function add_custom_meta_boxes() {
         add_meta_box(
             'parcel_details',

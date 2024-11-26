@@ -6,6 +6,20 @@ class Enqueue {
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
+        add_action('init', [$this, 'register_blocks']);
+    }
+
+    function register_blocks() {
+        // Enqueue block assets
+        wp_register_script(
+            'simple-block',
+            plugins_url('assets/build/registration.js', __FILE__),
+            [ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n' ],
+            filemtime(plugin_dir_path(__FILE__) . 'assets/build/registration.js')
+        );
+
+        register_block_type( DELIVERY_ASSISTANCE_PLUGIN_URL . '/src/blocks/registration' );
+        
     }
 
     public function enqueue_scripts() {
@@ -68,6 +82,14 @@ class Enqueue {
             $js_version, // Use the correct version
             true
         );
+
+        // Register block assets
+        // wp_register_script(
+        //     'delivery-assistance-blocks',
+        //     DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/blocks/registration/index.js',
+        //     ['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n'],
+        //     filemtime(DELIVERY_ASSISTANCE_PLUGIN_DIR . 'assets/js/blocks/registration/index.js')
+        // );
 
         // Localize script to pass data
         wp_localize_script(
