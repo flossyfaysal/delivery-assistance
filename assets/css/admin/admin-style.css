@@ -1,0 +1,121 @@
+/* Main container for the meta box */
+.parcel-meta-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #f8fafc; /* Subtle light background for contrast */
+  border: 1px solid #e2e8f0; /* Soft border for a clean UI */
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+/* Individual fields styling */
+.parcel-meta-box__field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.parcel-meta-box__field label {
+  font-size: 0.875rem; /* Small, readable text */
+  font-weight: 600; /* Semi-bold for better visibility */
+  color: #2d3748; /* Dark gray for labels */
+  margin-bottom: 6px;
+}
+
+/* Input and textarea styling */
+.parcel-meta-box__input,
+.parcel-meta-box__textarea {
+  padding: 10px 14px; /* Comfortable padding */
+  font-size: 0.875rem; /* Balanced font size */
+  line-height: 1.5rem;
+  border: 1px solid #cbd5e0; /* Subtle neutral border */
+  border-radius: 6px; /* Rounded edges for modern look */
+  background: #fdfdfd; /* Soft white background */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Light inner shadow */
+  transition: all 0.3s ease;
+}
+
+/* Textarea-specific adjustments */
+.parcel-meta-box__textarea {
+  min-height: 100px; /* Taller height for description fields */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Focus state for inputs and textareas */
+.parcel-meta-box__input:focus,
+.parcel-meta-box__textarea:focus {
+  border-color: #5a67d8; /* Attractive blue border on focus */
+  box-shadow: 0 0 6px rgba(90, 103, 216, 0.4); /* Glowing blue focus ring */
+  background: #ffffff; /* Pure white for focus clarity */
+  outline: none; /* Remove default outline */
+}
+
+.parcel-meta-box__input::placeholder,
+.parcel-meta-box__textarea::placeholder {
+  color: #a0aec0; /* Light gray placeholder */
+  font-style: italic; /* Subtle differentiation */
+}
+
+.parcel-meta-box__input:hover,
+.parcel-meta-box__textarea:hover {
+  border-color: #a3bffa; /* Lighter blue on hover */
+  background: #f7faff; /* Soft blue background */
+}
+
+/* Buttons and toggles in the meta box header */
+.postbox .handle-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 5px;
+  cursor: pointer;
+  color: #a0aec0; /* Neutral gray */
+  transition: color 0.2s ease;
+}
+
+.postbox .handle-actions button:hover {
+  color: #4a5568; /* Slightly darker on hover */
+}
+
+/* Postbox header styling */
+/* Remove border and add rounded corners for postbox header */
+.postbox-header {
+  background-color: #f9fafb; /* Light background for better contrast */
+  border: none; /* Remove border */
+  border-top-left-radius: 5px; /* Rounded corners */
+  border-top-right-radius: 5px; /* Rounded corners */
+  padding: 12px 16px; /* Comfortable padding */
+  font-size: 16px; /* Clear and readable font size */
+  font-weight: bold; /* Emphasized heading */
+  color: #333; /* Dark text for readability */
+}
+
+/* Add rounded corners and box shadow for postbox body */
+.postbox .inside {
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #ffffff; /* White background for clean look */
+  padding: 15px; /* Comfortable inner padding */
+}
+
+.postbox-header .hndle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a202c; /* Dark gray for title text */
+}
+
+.postbox-header .handle-actions {
+  display: flex;
+  gap: 5px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .parcel-meta-box {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+}

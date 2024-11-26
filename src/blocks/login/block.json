@@ -1,0 +1,14 @@
+{
+  "apiVersion": 2,
+  "name": "delivery-assistance/login",
+  "title": "Login Form",
+  "category": "widgets",
+  "icon": "admin-users",
+  "description": "A block for the login form.",
+  "keywords": ["login", "form"],
+  "supports": {
+    "html": false
+  },
+  "textdomain": "delivery-assistance",
+  "editorScript": "delivery-assistance-login"
+}
