@@ -1,0 +1,14 @@
+{
+  "apiVersion": 2,
+  "name": "delivery-assistance/registration",
+  "title": "Registration Form",
+  "category": "widgets",
+  "icon": "admin-users",
+  "description": "A block for the registration form.",
+  "keywords": ["registration", "form"],
+  "supports": {
+    "html": false
+  },
+  "textdomain": "delivery-assistance",
+  "editorScript": "delivery-assistance-registration"
+}

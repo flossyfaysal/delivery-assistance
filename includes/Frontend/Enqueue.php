@@ -10,15 +10,28 @@ class Enqueue {
     }
 
     function register_blocks() {
-        // Enqueue block assets
-        wp_register_script(
-            'simple-block',
-            plugins_url('assets/build/registration.js', __FILE__),
-            [ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n' ],
-            filemtime(plugin_dir_path(__FILE__) . 'assets/build/registration.js')
+        
+        $blockDirs = glob(plugin_dir_path(__FILE__) . 'src/blocks/*/block.json');
+        foreach ($blockDirs as $blockJsonPath) {
+            register_block_type_from_metadata($blockJsonPath);
+        }
+
+        $blocksToRegister = array(
+            'delivery-assistance/register' => 'delivery-assistance-registration',
+            'delivery-assistance/login' => 'delivery-assistance-login',
         );
 
-        register_block_type( DELIVERY_ASSISTANCE_PLUGIN_URL . '/src/blocks/registration' );
+        wp_enqueue_script(
+            'delivery-assistance-register',
+            DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/build/register.js',
+            ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-editor'], // Dependencies
+            filemtime(DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/build/register.js') // Cache-busting
+        );
+
+        // Register the block type
+        register_block_type('delivery-assistance/register', [
+            'editor_script' => 'delivery-assistance-register', 
+        ]);
         
     }
 
@@ -67,29 +80,20 @@ class Enqueue {
         );
 
         // Fix the path for the settings JS file
-        $js_file = DELIVERY_ASSISTANCE_PLUGIN_URL . '../../assets/js/settings.js';
+        $js_file = DELIVERY_ASSISTANCE_PLUGIN_URL . '../../assets/js/build/settings.js';
         if (file_exists($js_file)) {
             $js_version = filemtime($js_file); // Get the version from the file timestamp
         } else {
             $js_version = time(); // Fallback to current time if file does not exist
         }
 
-        // Enqueue the settings JS file
         wp_enqueue_script(
             'delivery-assistance-settings',
-            DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/settings.js',
-            ['wp-element', 'wp-api-fetch'],
-            $js_version, // Use the correct version
+            DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/build/settings.js',
+            ['wp-element', 'wp-components', 'wp-api-fetch'],
+            $js_version,
             true
         );
-
-        // Register block assets
-        // wp_register_script(
-        //     'delivery-assistance-blocks',
-        //     DELIVERY_ASSISTANCE_PLUGIN_URL . 'assets/js/blocks/registration/index.js',
-        //     ['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n'],
-        //     filemtime(DELIVERY_ASSISTANCE_PLUGIN_DIR . 'assets/js/blocks/registration/index.js')
-        // );
 
         // Localize script to pass data
         wp_localize_script(
